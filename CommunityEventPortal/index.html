@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Portal Base Template</title>
+        <style>
+            #welcomeBanner{
+                font-family: 'Courier New';
+                background-color: lightblue;
+                padding:20px;
+                border: 2px solid #0056b3;
+                border-radius:5px;
+                margin-bottom: 20px;
+            }
+
+            .highlight{
+                font-weight: bold;
+                background-color: yellow;
+                padding: 2px 5px;
+                border-radius: 3px;
+            }
+
+            .gallery-img{
+                border:3px solid #0056b3;
+                border-radius:5px;
+                width:200px;
+                height:150px;
+                object-fit:cover;
+            }
+
+            .gallery-table{
+                width:100%;
+                text-align:center;
+                margin-top:15px;
+            }
+
+            .gallery-table td {
+                padding: 10px;
+            }
+
+            .register-form{
+                backgroud-color: #f1f8ff;
+                padding:20px;
+                border:2px solid #0056b3;
+                border-radius:5px;
+                max-width:500px;
+                margin-top:20px;
+            }
+
+            .form-group{
+                margin-bottom:15px;
+            }
+
+            .form-group{
+                display:flex;
+                font-weight:bold;
+                margin-bottom:10px;
+            }
+
+            .btn:hover {
+                background-color: #004494;
+            }
+
+            .btn{
+                background-color:#a5c2e3;
+                color:white;
+                border:none;
+                padding:10px 20px;
+                border-radius:5px;
+                cursor:pointer;
+                font-weight:bold;
+            }
+
+            #formOutput{
+                font-weight:bold;
+                display:block;
+                margin-top:15px;
+                color:green;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Header Section -->
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#events">Events</a></li>
+                    <li><a href="#register">Register</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main Section -->
+        <main>
+
+            <!-- welcome message-->
+            <div id="welcomeBanner">
+                <h2>Welcome back ,<span style="color:red; font-weight:bold;"> Local Resident</span>!</h2>
+                <p>We are excited to see you. There are<span class="highlight"> 3 notifications</span> for you.</p>
+                <p>
+                    <span style="color:red; font-weight:bold;">Special Offer</span>
+                    Register for the weekend marathon by Friday and receive a free community T-shirt!
+                </p>
+            </div>
+            <!-- Home Section -->
+            <section id="home">
+                <h1>Welcome to the Portal</h1>
+                <p>This is where the primary content of the page will go.</p>
+            </section>
+            
+            <!-- Events Section -->
+            <section id="events">
+                <h2>Upcoming Events</h2>
+                <p>Join us for our annual portal conference this Friday, or check out memories from past events below:</p>
+                <table class="gallery-table">
+
+                    <tr>
+                        <td>
+                            <img src="images/image1.jpg" alt="Community Cleanup" title="Spring Park Cleanup" class="gallery-img">
+                            <p><strong>Spring Park Cleanup</strong></p>
+                        </td>
+
+                        <td>
+                            <img src="images/5K City Marathon.jpg" alt="5k City Marathon" title="5K City Marathon" class="gallery-img">
+                            <p><strong>5K City Marathon</strong></p>
+                        </td>
+
+                        <td>
+                            <img src="images/Charity Bake Sale.jpg" alt="Charity Bake Sale" title="Charity Bake Sale" class="gallery-img">
+                            <p><strong>Charity Bake Sale</strong></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <img src="images/Holiday Parade.jpg" alt="Holiday Parade" title="Holiday Parade" class="gallery-img">
+                            <p><strong>Holiday Parade</strong></p>
+                        </td>
+
+                        <td>
+                            <img src="images/Local Art Fair.jpg" alt="Local Art Fair" title="Local Art Fair" class="gallery-img">
+                            <p><strong>Local Art Fair</strong></p>
+                        </td>
+
+                        <td>
+                            <img src="images/Summer Festival.jpg" alt="Summer Festival" title="Summer Festival" class="gallery-img">
+                            <p><strong>Summer Festival</strong></p>
+                        </td>
+                    </tr>
+                </table>
+
+            </section>
+
+            <section id="register">
+                <h2>Register for Events</h2>
+                <p>Sign up for an upcoming community event below:</p>
+                
+                <form class="register-form" onsubmit="event.preventDefault(); 
+                document.getElementById('formOutput').value = 'Thanks for registering, ' 
+                + document.getElementById('name').value + '!';">
+
+                <div class="form-group">
+                     <label for="name">Name</label>
+                     <input type="text" id="name" name="name" required auto-focus placeholder="eg.Rushikesh">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="eg.rushi@gmail.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Event Date</label>
+                    <input type="date"  id="date" name="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="eventtype">Event Type</label>
+                    <select id="event-type" name="event-type" required>
+                        <option value="">Select an event type</option>
+                        <option value="cleanup">Spring Park Cleanup</option>
+                        <option value="marathon">5K City Marathon</option>
+                        <option value="bakesale">Charity Bake Sale</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="text-area">Additional Requirements or Comments:</label>
+                    <textarea  id="text-area" name="text-area" rows="10" cols="10" placeholder="Let us know if you have accessibility needs or dietary restrictions..."></textarea>
+                </div>
+
+                <div class="form-grop">
+                    <input type="submit" id="submit" class="btn" value="Register">
+                </div>
+
+                <output id="formOutput"></output>
+                </form>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact">
+                <h2>Contact Us</h2>
+                <p>Email us at 
+                    <a href="mailto:support@portal.com">support@portal.com</a>
+                </p>
+            </section>
+
+        </main>
+
+        <!-- footer Section -->
+        <footer>
+            <p>&copy; 2026 Portal Project. All rights reserved.</p>
+            <p><a href="https://example.com/help-document" target="_blank">External Help Document</a></p>
+        </footer>
+
+    </body>
+</html>
