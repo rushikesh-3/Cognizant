@@ -27,6 +27,7 @@
                 width:200px;
                 height:150px;
                 object-fit:cover;
+                
             }
 
             .gallery-table{
@@ -40,7 +41,7 @@
             }
 
             .register-form{
-                backgroud-color: #f1f8ff;
+                background-color: #f1f8ff;
                 padding:20px;
                 border:2px solid #0056b3;
                 border-radius:5px;
@@ -119,7 +120,8 @@
 
                     <tr>
                         <td>
-                            <img src="images/image1.jpg" alt="Community Cleanup" title="Spring Park Cleanup" class="gallery-img">
+                            <img src="images/image1.jpg" alt="Community Cleanup" title="Spring Park Cleanup" class="gallery-img"
+                            ondblclick="this.style.transform=this.style.transform=='scale(1.5)'?'scale(1.0)':'scale(1.5)';">
                             <p><strong>Spring Park Cleanup</strong></p>
                         </td>
 
@@ -152,6 +154,7 @@
                     </tr>
                 </table>
 
+                
             </section>
 
             <section id="register">
@@ -164,12 +167,18 @@
 
                 <div class="form-group">
                      <label for="name">Name</label>
-                     <input type="text" id="name" name="name" required auto-focus placeholder="eg.Rushikesh">
+                     <input type="text" id="name" name="name" required autofocus placeholder="eg.Rushikesh">
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" placeholder="eg.rushi@gmail.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number : </label>
+                    <input type="tel" id="phone" name="phone" placeholder="eg.1234567890" required pattern="[0-9]{10}" 
+                    onblur="if(this.value.length>0 && this.value.length<10) alert('please enter valid number')">
                 </div>
 
                 <div class="form-group">
@@ -179,21 +188,24 @@
 
                 <div class="form-group">
                     <label for="eventtype">Event Type</label>
-                    <select id="event-type" name="event-type" required>
+                    <select id="event-type" name="event-type" required onchange="document.getElementById('enteryfee').innerText=this.value ? 'Entry fee: $10' : '';">
                         <option value="">Select an event type</option>
                         <option value="cleanup">Spring Park Cleanup</option>
                         <option value="marathon">5K City Marathon</option>
                         <option value="bakesale">Charity Bake Sale</option>
                     </select>
+                    <span id="enteryfee" style="color:red; font-weight:bold; margin-left: 10px;"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="text-area">Additional Requirements or Comments:</label>
-                    <textarea  id="text-area" name="text-area" rows="10" cols="10" placeholder="Let us know if you have accessibility needs or dietary restrictions..."></textarea>
+                    <textarea  id="text-area" name="text-area" rows="10" cols="10" placeholder="Let us know if you have accessibility needs or dietary restrictions..."
+                    onkeyup="document.getElementById('char-count').innerText=this.value.length"></textarea>
+                    <small style="font-weight: bold; margin-left: 10px;">Characters :<span id="char-count" >0</span></small>
                 </div>
 
                 <div class="form-grop">
-                    <input type="submit" id="submit" class="btn" value="Register">
+                    <input type="submit" id="submit" class="btn" value="Register" onclick="alert('Confirming your registration details...')">
                 </div>
 
                 <output id="formOutput"></output>
