@@ -1,0 +1,130 @@
+mysql> CREATE DATABASE event_management;
+Query OK, 1 row affected (0.06 sec)
+
+mysql> USE event_management;
+Database changed
+mysql> CREATE TABLE Users(user_id INT PRIMARY KEY AUTO_INCREMENT,full_name VARCHAR(100) NOT NULL,email VARCHAR(100) UNIQUE,NOT NULL,city VARCHAR
+    -> (100) NOT NULL,registration_date DATE NOT NULL);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'NOT NULL,city VARCHAR
+(100) NOT NULL,registration_date DATE NOT NULL)' at line 1
+mysql> CREATE TABLE Users(user_id INT PRIMARY KEY AUTO_INCREMENT,full_name VARCHAR(100) NOT NULL,email VARCHAR(100) UNIQUE NOT NULL,city VARCHAR
+    -> (100) NOT NULL,registration_date DATE NOT NULL);
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> SHOW TABLES;
++----------------------------+
+| Tables_in_event_management |
++----------------------------+
+| users                      |
++----------------------------+
+1 row in set (0.04 sec)
+
+mysql> DESC Users
+    -> ;
++-------------------+--------------+------+-----+---------+----------------+
+| Field             | Type         | Null | Key | Default | Extra          |
++-------------------+--------------+------+-----+---------+----------------+
+| user_id           | int          | NO   | PRI | NULL    | auto_increment |
+| full_name         | varchar(100) | NO   |     | NULL    |                |
+| email             | varchar(100) | NO   | UNI | NULL    |                |
+| city              | varchar(100) | NO   |     | NULL    |                |
+| registration_date | date         | NO   |     | NULL    |                |
++-------------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> CREATE 
+    -> TABLE Events(event_id int Auto_increment,title varchar(200) not null,description text,city varchar(100) not null,start_date datetime not null,end_date datetime not null,status enum('upcoming','completed','cancelled'),organizer_id int,constraint pk_event primary key (event_id),constraint fk_event_organizer foreign key (organizer_id) references User(user_id));
+ERROR 1824 (HY000): Failed to open the referenced table 'user'
+mysql> CREATE TABLE Events (
+    ->     event_id INT AUTO_INCREMENT,
+    ->     title VARCHAR(200) NOT NULL,
+    ->     description TEXT,
+    ->     city VARCHAR(100) NOT NULL,
+    ->     start_date DATETIME NOT NULL,
+    ->     end_date DATETIME NOT NULL,
+    ->     status ENUM('upcoming','completed','cancelled'),
+    ->     organizer_id INT,
+    ->     
+    ->     CONSTRAINT pk_event PRIMARY KEY (event_id),
+    ->     CONSTRAINT fk_event_organizer
+    ->         FOREIGN KEY (organizer_id)
+    ->         REFERENCES Users(user_id)
+    -> );
+Query OK, 0 rows affected (0.15 sec)
+
+mysql> describe Events
+    -> ;
++--------------+------------------------------------------+------+-----+---------+----------------+
+| Field        | Type                                     | Null | Key | Default | Extra          |
++--------------+------------------------------------------+------+-----+---------+----------------+
+| event_id     | int                                      | NO   | PRI | NULL    | auto_increment |
+| title        | varchar(200)                             | NO   |     | NULL    |                |
+| description  | text                                     | YES  |     | NULL    |                |
+| city         | varchar(100)                             | NO   |     | NULL    |                |
+| start_date   | datetime                                 | NO   |     | NULL    |                |
+| end_date     | datetime                                 | NO   |     | NULL    |                |
+| status       | enum('upcoming','completed','cancelled') | YES  |     | NULL    |                |
+| organizer_id | int                                      | YES  | MUL | NULL    |                |
++--------------+------------------------------------------+------+-----+---------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Sessions (
+    ->     session_id INT AUTO_INCREMENT,
+    ->     event_id INT,
+    ->     title VARCHAR(200) NOT NULL,
+    ->     speaker_name VARCHAR(100) NOT NULL,
+    ->     start_time DATETIME NOT NULL,
+    ->     end_time DATETIME NOT NULL,
+    ->     
+    ->     -- We can keep the primary key inline or table-level, let's do table-level here
+    ->     CONSTRAINT pk_session PRIMARY KEY (session_id)
+    -> );
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> ALTER TABLE Sessions
+    -> ADD CONSTRAINT fk_session_event FOREIGN KEY (event_id) REFERENCES Events(event_id);
+Query OK, 0 rows affected (0.22 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE Sessions;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| session_id   | int          | NO   | PRI | NULL    | auto_increment |
+| event_id     | int          | YES  | MUL | NULL    |                |
+| title        | varchar(200) | NO   |     | NULL    |                |
+| speaker_name | varchar(100) | NO   |     | NULL    |                |
+| start_time   | datetime     | NO   |     | NULL    |                |
+| end_time     | datetime     | NO   |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Registrations (
+    ->     registration_id INT AUTO_INCREMENT,
+    ->     user_id INT,
+    ->     event_id INT,
+    ->     registration_date DATE NOT NULL,
+    ->     
+    ->     -- Table-level constraints for a clean layout of multiple keys
+    ->     CONSTRAINT pk_registration PRIMARY KEY (registration_id),
+    ->     CONSTRAINT fk_reg_user FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    ->     CONSTRAINT fk_reg_event FOREIGN KEY (event_id) REFERENCES Events(event_id)
+    -> );
+Query OK, 0 rows affected (0.15 sec)
+
+mysql> DESCRIBE Registrations;
++-------------------+------+------+-----+---------+----------------+
+| Field             | Type | Null | Key | Default | Extra          |
++-------------------+------+------+-----+---------+----------------+
+| registration_id   | int  | NO   | PRI | NULL    | auto_increment |
+| user_id           | int  | YES  | MUL | NULL    |                |
+| event_id          | int  | YES  | MUL | NULL    |                |
+| registration_date | date | NO   |     | NULL    |                |
++-------------------+------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> commit
+    -> ;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> notee;
