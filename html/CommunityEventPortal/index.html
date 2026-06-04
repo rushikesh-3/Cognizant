@@ -5,84 +5,100 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Portal Base Template</title>
         <style>
-            #welcomeBanner{
-                font-family: 'Courier New';
+            #welcomeBanner {
+                font-family: 'Courier New', Courier, monospace;
                 background-color: lightblue;
-                padding:20px;
+                padding: 20px;
                 border: 2px solid #0056b3;
-                border-radius:5px;
+                border-radius: 5px;
                 margin-bottom: 20px;
             }
 
-            .highlight{
+            .highlight {
                 font-weight: bold;
                 background-color: yellow;
                 padding: 2px 5px;
                 border-radius: 3px;
             }
 
-            .gallery-img{
-                border:3px solid #0056b3;
-                border-radius:5px;
-                width:200px;
-                height:150px;
-                object-fit:cover;
-                
+            .gallery-img {
+                border: 3px solid #0056b3;
+                border-radius: 5px;
+                width: 200px;
+                height: 150px;
+                object-fit: cover;
+                transition: transform 0.3s ease;
             }
 
-            .gallery-table{
-                width:100%;
-                text-align:center;
-                margin-top:15px;
+            .gallery-table {
+                width: 100%;
+                text-align: center;
+                margin-top: 15px;
             }
 
             .gallery-table td {
                 padding: 10px;
             }
 
-            .register-form{
+            .register-form {
                 background-color: #f1f8ff;
-                padding:20px;
-                border:2px solid #0056b3;
-                border-radius:5px;
-                max-width:500px;
-                margin-top:20px;
+                padding: 20px;
+                border: 2px solid #0056b3;
+                border-radius: 5px;
+                max-width: 500px;
+                margin-top: 20px;
             }
 
-            .form-group{
-                margin-bottom:15px;
+            .form-group {
+                margin-bottom: 15px;
             }
 
-            .form-group{
-                display:flex;
-                font-weight:bold;
-                margin-bottom:10px;
+            /* Fixed: Targeted the label so it sits nicely above the inputs */
+            .form-group label {
+                display: block;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            .form-group input, 
+            .form-group select, 
+            .form-group textarea {
+                width: 100%;
+                padding: 8px;
+                box-sizing: border-box;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            .btn {
+                background-color: #a5c2e3;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                margin-top: 10px;
             }
 
             .btn:hover {
                 background-color: #004494;
             }
 
-            .btn{
-                background-color:#a5c2e3;
-                color:white;
-                border:none;
-                padding:10px 20px;
-                border-radius:5px;
-                cursor:pointer;
-                font-weight:bold;
-            }
-
-            #formOutput{
-                font-weight:bold;
-                display:block;
-                margin-top:15px;
-                color:green;
+            #formOutput {
+                font-weight: bold;
+                display: block;
+                margin-top: 15px;
+                color: green;
             }
         </style>
+        
+        <script src="main.js">
+        </script>
     </head>
+    
     <body onbeforeunload="return 'Are you sure you want to leave? Your registration details will be lost.'">
-        <!-- Header Section -->
+        
         <header>
             <nav>
                 <ul>
@@ -94,59 +110,50 @@
             </nav>
         </header>
 
-        <!-- Main Section -->
         <main>
 
-            <!-- welcome message-->
             <div id="welcomeBanner">
-                <h2>Welcome back ,<span style="color:red; font-weight:bold;"> Local Resident</span>!</h2>
-                <p>We are excited to see you. There are<span class="highlight"> 3 notifications</span> for you.</p>
+                <h2>Welcome back, <span style="color:red; font-weight:bold;">Local Resident</span>!</h2>
+                <p>We are excited to see you. There are <span class="highlight">3 notifications</span> for you.</p>
                 <p>
-                    <span style="color:red; font-weight:bold;">Special Offer</span>
+                    <span style="color:red; font-weight:bold;">Special Offer:</span>
                     Register for the weekend marathon by Friday and receive a free community T-shirt!
                 </p>
             </div>
-            <!-- Home Section -->
+            
             <section id="home">
                 <h1>Welcome to the Portal</h1>
                 <p>This is where the primary content of the page will go.</p>
             </section>
             
-            <!-- Events Section -->
             <section id="events">
                 <h2>Upcoming Events</h2>
                 <p>Join us for our annual portal conference this Friday, or check out memories from past events below:</p>
                 <table class="gallery-table">
-
                     <tr>
                         <td>
                             <img src="images/image1.jpg" alt="Community Cleanup" title="Spring Park Cleanup" class="gallery-img"
                             ondblclick="this.style.transform=this.style.transform=='scale(1.5)'?'scale(1.0)':'scale(1.5)';">
                             <p><strong>Spring Park Cleanup</strong></p>
                         </td>
-
                         <td>
                             <img src="images/5K City Marathon.jpg" alt="5k City Marathon" title="5K City Marathon" class="gallery-img">
                             <p><strong>5K City Marathon</strong></p>
                         </td>
-
                         <td>
                             <img src="images/Charity Bake Sale.jpg" alt="Charity Bake Sale" title="Charity Bake Sale" class="gallery-img">
                             <p><strong>Charity Bake Sale</strong></p>
                         </td>
                     </tr>
-
                     <tr>
                         <td>
                             <img src="images/Holiday Parade.jpg" alt="Holiday Parade" title="Holiday Parade" class="gallery-img">
                             <p><strong>Holiday Parade</strong></p>
                         </td>
-
                         <td>
                             <img src="images/Local Art Fair.jpg" alt="Local Art Fair" title="Local Art Fair" class="gallery-img">
                             <p><strong>Local Art Fair</strong></p>
                         </td>
-
                         <td>
                             <img src="images/Summer Festival.jpg" alt="Summer Festival" title="Summer Festival" class="gallery-img">
                             <p><strong>Summer Festival</strong></p>
@@ -158,88 +165,86 @@
                     <h3>Watch Our Promo!</h3>
                     <video width="100%" style="max-width:500px" controls 
                     oncanplay="document.getElementById('video-status').innerText='🎥 Video is ready to play!'">
-                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
+                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
                     </video>
                     <br>
                     <span id="video-status" style="color: #0056b3; font-weight: bold;">Loading Video...</span>
-                </div>>
-
                 </div>
-                
+
+                <div style="margin:20px 0; padding:15px; background-color:#e9ecef; border-radius:5px; text-align:center;">
+                    <h3>Find Events Near You</h3>
+                    <p>Allow location access to see the closest events.</p>
+                    <button type="button" class="btn" onclick="getLocation()">Find Nearby Events</button>
+                    <p id="location-output" style="margin-top:10px; font-weight:bold; color:#0056b3;"></p>
+                </div>
+
             </section>
 
             <section id="register">
                 <h2>Register for Events</h2>
                 <p>Sign up for an upcoming community event below:</p>
                 
-                <form class="register-form" onsubmit="event.preventDefault(); 
-                document.getElementById('formOutput').value = 'Thanks for registering, ' 
-                + document.getElementById('name').value + '!';">
+                <form class="register-form" onsubmit="event.preventDefault(); document.getElementById('formOutput').value = 'Thanks for registering, ' + document.getElementById('name').value + '!';">
+                    
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required autofocus placeholder="e.g. Rushikesh">
+                    </div>
 
-                <div class="form-group">
-                     <label for="name">Name</label>
-                     <input type="text" id="name" name="name" required autofocus placeholder="eg.Rushikesh">
-                </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="e.g. rushi@gmail.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number:</label>
+                        <input type="tel" id="phone" name="phone" placeholder="e.g. 1234567890" required pattern="[0-9]{10}" 
+                        onblur="if(this.value.length > 0 && this.value.length < 10) alert('please enter valid number')">
+                    </div>
 
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="eg.rushi@gmail.com" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="phone">Phone Number : </label>
-                    <input type="tel" id="phone" name="phone" placeholder="eg.1234567890" required pattern="[0-9]{10}" 
-                    onblur="if(this.value.length>0 && this.value.length<10) alert('please enter valid number')">
-                </div>
+                    <div class="form-group">
+                        <label for="date">Event Date</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
 
-                <div class="form-group">
-                    <label for="date">Event Date</label>
-                    <input type="date"  id="date" name="date" required>
-                </div>
+                    <div class="form-group">
+                        <label for="event-type">Event Type</label>
+                        <select id="event-type" name="event-type" required onchange="document.getElementById('enteryfee').innerText = this.value ? 'Entry fee: $10' : ''; localStorage.setItem('preferredEvent', this.value);">
+                            <option value="">Select an event type</option>
+                            <option value="cleanup">Spring Park Cleanup</option>
+                            <option value="marathon">5K City Marathon</option>
+                            <option value="bakesale">Charity Bake Sale</option>
+                        </select>
+                        <span id="enteryfee" style="color:red; font-weight:bold; margin-top: 5px; display: block;"></span>
+                    </div>
 
-                <div class="form-group">
-                    <label for="eventtype">Event Type</label>
-                    <select id="event-type" name="event-type" required onchange="document.getElementById('enteryfee').innerText=this.value ? 'Entry fee: $10' : '';
-                    localstorage.setItem('prefferedEvent',this.value);">
-                        <option value="">Select an event type</option>
-                        <option value="cleanup">Spring Park Cleanup</option>
-                        <option value="marathon">5K City Marathon</option>
-                        <option value="bakesale">Charity Bake Sale</option>
-                    </select>
-                    <span id="enteryfee" style="color:red; font-weight:bold; margin-left: 10px;"></span>
-                </div>
+                    <div class="form-group">
+                        <label for="text-area">Additional Requirements or Comments:</label>
+                        <textarea id="text-area" name="text-area" rows="4" placeholder="Let us know if you have accessibility needs or dietary restrictions..."
+                        onkeyup="document.getElementById('char-count').innerText=this.value.length"></textarea>
+                        <small style="font-weight: bold; color: #555;">Characters: <span id="char-count">0</span></small>
+                    </div>
 
-                <div class="form-group">
-                    <label for="text-area">Additional Requirements or Comments:</label>
-                    <textarea  id="text-area" name="text-area" rows="10" cols="10" placeholder="Let us know if you have accessibility needs or dietary restrictions..."
-                    onkeyup="document.getElementById('char-count').innerText=this.value.length"></textarea>
-                    <small style="font-weight: bold; margin-left: 10px;">Characters :<span id="char-count" >0</span></small>
-                </div>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="submit" id="submit" class="btn" value="Register" onclick="alert('Confirming your registration details...')">
+                        <button type="button" class="btn" style="background-color: #dc3545;" 
+                        onclick="localStorage.clear(); sessionStorage.clear(); document.getElementById('event-type').value = ''; document.getElementById('enteryfee').innerText = ''; alert('Preferences cleared!');">
+                            Clear Preferences
+                        </button>
+                    </div>
 
-                <div class="form-group">
-                    <input type="submit" id="submit" class="btn" value="Register" onclick="alert('Confirming your registration details...')">
-                    <button type="button" class="btn" style="background-color: #dc3545; margin-left: 10px;" 
-            onclick="localStorage.clear(); sessionStorage.clear(); document.getElementById('event-type').value = ''; document.getElementById('enteryfee').innerText = ''; alert('Preferences cleared!');">
-        Clear Preferences
-    </button>
-                </div>
-
-                <output id="formOutput"></output>
+                    <output id="formOutput"></output>
                 </form>
             </section>
 
-            <!-- Contact Section -->
             <section id="contact">
                 <h2>Contact Us</h2>
-                <p>Email us at 
-                    <a href="mailto:support@portal.com">support@portal.com</a>
-                </p>
+                <p>Email us at <a href="mailto:support@portal.com">support@portal.com</a></p>
             </section>
 
         </main>
 
-        <!-- footer Section -->
         <footer>
             <p>&copy; 2026 Portal Project. All rights reserved.</p>
             <p><a href="https://example.com/help-document" target="_blank">External Help Document</a></p>
